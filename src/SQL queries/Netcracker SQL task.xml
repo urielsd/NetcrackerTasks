@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<displays>
+<display id="e2d2b567-0186-1000-8001-c0a864035cde" type="" style="Table" enable="true">
+	<name><![CDATA[SQL Report task]]></name>
+	<description><![CDATA[Task is to get a report (implement a select statement) that will have:
+-
+every employee name (only once)
+-
+amount of clients acquired in March 2021 (single number)]]></description>
+	<tooltip><![CDATA[]]></tooltip>
+	<drillclass><![CDATA[]]></drillclass>
+	<CustomValues>
+		<TYPE><![CDATA[horizontal]]></TYPE>
+	</CustomValues>
+	<query>
+		<sql><![CDATA[select e.employee_name, sum(new_clients_count) as "amount of clients"
+from emp_client_stat ecs, employees e
+where e.employee_id = ecs.employee_id
+and extract (month from ecs."date") = 3 -- To filter out any non-March resutls
+group by e.employee_name]]></sql>
+	</query>
+</display>
+</displays>
